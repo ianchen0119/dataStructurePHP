@@ -1,18 +1,20 @@
 <?php
-interface stackInterface
-{
+
+interface queueInterface{
     function getLength();
     function pop();
     function push($value);
-    function top();
-    // top: 得到最上面的值
-    // push: 再拿一個盤子往上疊
-    // pop: 拿掉最上面的盤子    
+    function front();
+    function back();  
+    // push: 把一個值加到尾巴
+    // pop: 把第一個值移除掉
+    // back: 得到尾巴的值
+    // front: 得到頭的值
 }
-class stack implements stackInterface
-{
+class queue implements queueInterface{
     private $length = 0;
     private $container = array();
+
     function getLength(){
         echo "長度為：{$this->length}";
         echo"<br>";
@@ -24,7 +26,7 @@ class stack implements stackInterface
         }
         else{
             $this->length--;
-            array_pop($this->container);
+            array_splice($this->container,0);
         }
     }
     function push($value){
@@ -37,7 +39,7 @@ class stack implements stackInterface
             echo"<br>";
         }
     }
-    function top(){
+    function back(){
         if($this->length==0){
             echo"請存放東西！";
             echo"<br>";
@@ -46,29 +48,15 @@ class stack implements stackInterface
             print_r($this->container[$this->length-1]);
             echo"<br>";
         }
-    }  
+    }
+    function front(){
+        if($this->length==0){
+            echo"請存放東西！";
+            echo"<br>";
+        }
+        else{
+            print_r($this->container[0]);
+            echo"<br>";
+        }
+    }    
 }
-$stackA = new stack();
-$stackA->getLength();
-$stackA->top();
-$stackA->push("1");
-$stackA->getLength();
-$stackA->top();
-$stackA->push("2");
-$stackA->getLength();
-$stackA->top();
-$stackA->push("3");
-$stackA->getLength();
-$stackA->top();
-$stackA->pop();
-$stackA->getLength();
-$stackA->top();
-$stackA->pop();
-$stackA->getLength();
-$stackA->top();
-$stackA->pop();
-$stackA->getLength();
-$stackA->top();
-$stackA->pop();
-$stackA->getLength();
-$stackA->top();
