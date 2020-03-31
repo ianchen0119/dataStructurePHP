@@ -26,7 +26,7 @@ class queue implements queueInterface{
         }
         else{
             $this->length--;
-            array_splice($this->container,0);
+            array_splice($this->container,0,1);
         }
     }
     function push($value){
